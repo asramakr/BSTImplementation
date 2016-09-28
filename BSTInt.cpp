@@ -1,5 +1,7 @@
 
 #include "BSTInt.h"
+#include <iostream>
+using namespace std;
 
 /* Function definitions for a int-based BST class */
 
@@ -125,5 +127,32 @@ bool BSTInt::empty() const
  */
 void BSTInt::deleteAll(BSTNodeInt* n)
 {
-  // TODO
+  BSTNodeInt* curr = n;
+  while(curr){
+    if(curr->left){
+      curr = curr->left;
+    }
+
+    else if(curr->right){
+      curr = curr->right;
+    }
+    else if(curr->parent){
+      curr = curr->parent;
+      if(curr->left) {
+        delete curr->left;
+        curr->left = NULL;
+        cout << "deleting left" << endl;
+      }
+      else if(curr->right) {
+        delete curr->right;
+        curr->right = NULL;
+        cout << "deleting" << endl;
+      }
+    }
+    else{
+      delete curr;
+      curr = NULL;
+      break;
+    } 
+  }
 }
