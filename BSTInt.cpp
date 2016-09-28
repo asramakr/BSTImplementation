@@ -31,8 +31,11 @@ bool BSTInt::insert(int item)
   BSTNodeInt* curr = root;
   
   while (curr->left || curr->right) {
-    if(){
-      
+    if(!(curr->left) && item < curr->data){
+      break;
+    }
+    else if(!(curr->right) && item > curr->data){
+      break;
     }
     else if (item < curr->data) {
       curr = curr->left;

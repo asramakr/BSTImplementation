@@ -97,9 +97,9 @@ int main() {
 
     /* Test to find return value. */
     /* Test items that are not in the tree */
-    if(b2.find(6) == false) {
-        cout << "Correctly found that 6 does not exist in the vector" << endl;
-       // return 1;
+    if(b2.find(6)) {
+        cout << "Incorrect return value when finding 6" << endl;
+        return -1;
     } 
 
     /*Our test 2*/
@@ -130,12 +130,10 @@ int main() {
     }
 
     /* Test find return value. */
-    /* Test if can find 1 in vector */
-    if (b3.find(4) == true) {
-        cout << "found 4 in vector" << endl;
-    }
-    else {
-	cout << "could not find 4 in vector" << endl;
+    /* Test if can find 4 in vector */
+    if (!b3.find(4)) {
+        cout << "Incorrect return value when finding 4" << endl;
+        return -1;
     }
 
     /* Test find return value. */
@@ -176,12 +174,10 @@ int main() {
     }
 
     /* Test find return value. */
-    /* Test if can find 1 in vector */
-    if (b4.find(2) == true) {
-        cout << "found 2 in vector" << endl;
-    }
-    else {
-	cout << "could not find 2 in vector" << endl;
+    /* Test if can find 2 in vector */
+    if (!b4.find(2)) {
+        cout << "Incorrect return value when finding 2" << endl;
+        return -1;
     }
 
     /* Test find return value. */
@@ -192,6 +188,74 @@ int main() {
             return -1;
         }
     }
+
+    /*Our test 4*/
+    vector<int> testOfInts4;
+
+    /* Create an instance of BST holding int */
+    BSTInt b5;
+
+    /* Test size. */
+    cout << "Size is: " << b5.size() << endl;
+    if(b5.size() != testOfInts4.size()) {
+        cout << "... which is incorrect." << endl;
+        return -1;
+    }
+
+    /* Test find return value. */
+    // Test the items that are not in tree
+    if(b5.find(1)) {
+        cout << "Incorrect return value when finding 1" << endl;
+        return -1;
+    }
+    
+    /*Our test 5*/
+    vector<int> testOfInts5;
+    testOfInts5.push_back(5);
+    testOfInts5.push_back(2);
+    testOfInts5.push_back(8);
+    testOfInts5.push_back(0);
+    testOfInts5.push_back(10);
+    testOfInts5.push_back(6);
+    testOfInts5.push_back(4);
+
+    /* Create an instance of BST holding int */
+    BSTInt b6;
+
+    // Could use: for(auto item : v) { instead of the line below
+    for(int item : testOfInts5) {
+        bool pr = b6.insert(item);
+        if(! pr ) {
+            cout << "Incorrect bool return value when inserting " << item 
+                 << endl;
+            return -1;
+        }
+    }
+
+
+    /* Test size. */
+    cout << "Size is: " << b6.size() << endl;
+    if(b6.size() != testOfInts5.size()) {
+        cout << "... which is incorrect." << endl;
+        return -1;
+    }
+
+    /* Test find return value. */
+    /* Test if can find 3, which isn't in vector */
+    if (b6.find(3)) {
+        cout << "Incorrect return value when finding 3" << endl;
+        return -1;
+    }
+
+    /* Test find return value. */
+    // Test the items that are already in the tree
+    for(int item : testOfInts5) {
+        if(!b6.find(item)) {
+            cout << "Incorrect return value when finding " << item << endl;
+            return -1;
+        }
+    }
+    
 
     /* UNCOMMENT THE LINES BELOW TO TEST THE TEMPLATE-BASED ITERATOR */
 

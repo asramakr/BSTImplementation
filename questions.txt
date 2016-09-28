@@ -16,8 +16,35 @@ BSTInt.cpp:56:5: error: 'isize' was not declared in this scope
      ^
 make: *** [BSTInt.o] Error 1
 
-    This error occurs because the scope of the insert() function is not
-    specified as under the BSTInt class, and the variables, root and isize,
-    are defined as private within the BSTInt class. Therefore, root and isize
-    cannot be accessed or called without defining the scope under the BSTInt 
-    class. 
+This error occurs because the scope of the insert() function is not
+specified as under the BSTInt class, and the variables, root and isize,
+are defined as private within the BSTInt class. Therefore, root and isize
+cannot be accessed or called without defining the scope under the BSTInt 
+class.
+
+Q3. In the insert() function defined within the BSTInt class, it only
+    checked if the current node had both the left and right children, and
+    it would insert the new node if the current node didn't have both. This
+    caused a problem because the insertion of the new node could overwrite
+    the left or right child of the current node if the current node only had
+    one or the other.
+
+Q4. When we were writing the tests, one test consisted of the root node
+    having a left child and that left child also having a left child. After
+    the test was run and the tester was calling the find() function to look
+    for all the nodes in the tree, it couldn't find the root's left child,
+    but it could find the last left child inserted. We then went back through
+    the code for the insert() function to trace how the program was being run
+    and how it inserted each node individually. We noticed that the original
+    while loop only checks if the current node has both left and right 
+    children and didn't check if only the left node or only the right node
+    existed. Then, to confirm this conclusion, we ran gdb after we replaced
+    the original '&&' with '||' in the while loop and stepped through
+    each line as the program ran and called it. After 3 and 4 were inserted
+    consecutively, there was a segmentation fault where 1 was being inserted
+    under the root node's (3) left child, which didn't exist. So we knew that
+    the while loop needed to keep checking if the current node has either
+    children and if the new node would be inserted under those children or the
+    current node itself.
+
+
