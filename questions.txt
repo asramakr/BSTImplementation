@@ -1,3 +1,9 @@
+Questions.txt
+Authors: Arun Ramakrishnan, Alexis Atianzar
+Date: 9/30/16
+Description: This file contains all the answers to the questions asked on 
+the write up.
+
 Q1. All the files that are created from typing "make bst" for the first time
     are BSTInt.o, BSTNodeInt.o, and testBST.o.
 Q2. 
