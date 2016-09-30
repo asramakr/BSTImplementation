@@ -63,7 +63,7 @@ public:
    */
   bool empty() const;
 
-  unsigned int heightHelper(BSTInt* n);
+  unsigned int heightHelper(BSTNodeInt* n) const;
 
 
 

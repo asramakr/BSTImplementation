@@ -104,7 +104,7 @@ unsigned int BSTInt::size() const
  */
 unsigned int BSTInt::height() const
 {
-  heightVar=0;
+//  heightVar=0;
   heightHelper(root);
   return heightVar;
 }
@@ -128,22 +128,22 @@ bool BSTInt::empty() const
  *
  */
 
-unsigned int BSTInt::heightHelper(BSTNodeInt* n){
+unsigned int BSTInt::heightHelper(BSTNodeInt* n) const {
   unsigned int leftCounter = 0;
   unsigned int rightCounter = 0;
   if(n->left){
-    leftCounter += heightHelper(n->left)+1;
+    leftCounter += heightHelper(n->left);
   }
   if(n->right){
-    rightCounter += heightHelper(n->right)+1;
+    rightCounter += heightHelper(n->right);
   }
   if(rightCounter > heightVar){
-    heightVar = rightCounter;
+    return rightCounter;
   }
-  if(leftCounter > heightVar){
-    heightVar = leftCounter;
+  else if(leftCounter > heightVar){
+    return leftCounter;
   }
-  return heightVar;
+  return 0;
 }
 
 /** do a postorder traversal, deleting nodes
