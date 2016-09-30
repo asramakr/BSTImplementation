@@ -104,8 +104,9 @@ unsigned int BSTInt::size() const
  */
 unsigned int BSTInt::height() const
 {
-  // TODO
-  return 0;
+  heightVar=0;
+  heightHelper(root);
+  return heightVar;
 }
 
 
@@ -113,12 +114,37 @@ unsigned int BSTInt::height() const
  */
 bool BSTInt::empty() const 
 {
-  // TODO
-  return false;
+  if(isize == 0) {
+    return true;
+  }
+  else {
+    return false;
+  }
 }
 
 
+/**
+ * This is a helper function for the height function. This is recursive.
+ *
+ */
 
+unsigned int BSTInt::heightHelper(BSTNodeInt* n){
+  unsigned int leftCounter = 0;
+  unsigned int rightCounter = 0;
+  if(n->left){
+    leftCounter += heightHelper(n->left)+1;
+  }
+  if(n->right){
+    rightCounter += heightHelper(n->right)+1;
+  }
+  if(rightCounter > heightVar){
+    heightVar = rightCounter;
+  }
+  if(leftCounter > heightVar){
+    heightVar = leftCounter;
+  }
+  return heightVar;
+}
 
 /** do a postorder traversal, deleting nodes
  * This is a helper for the destructor

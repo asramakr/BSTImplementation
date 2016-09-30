@@ -63,6 +63,8 @@ public:
    */
   bool empty() const;
 
+  unsigned int heightHelper(BSTInt* n);
+
 
 
 private:
@@ -73,6 +75,8 @@ private:
   /** Number of Data items stored in this BST. 
    *  Cache this number for efficiency. */
   unsigned int isize;
+
+  unsigned int heightVar;
 
 
   /** do a postorder traversal, deleting nodes

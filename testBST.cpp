@@ -232,6 +232,8 @@ int main() {
         }
     }
 
+    cout << "Height is... "<< b6.height() << endl;
+
 
     /* Test size. */
     cout << "Size is: " << b6.size() << endl;
