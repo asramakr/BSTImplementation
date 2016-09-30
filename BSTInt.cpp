@@ -1,7 +1,5 @@
 
 #include "BSTInt.h"
-#include <iostream>
-using namespace std;
 
 /* Function definitions for a int-based BST class */
 
@@ -24,6 +22,8 @@ BSTInt::~BSTInt() {
 
 bool BSTInt::insert(int item)
 {
+
+  unsigned int localHeight = 0;
   if (!root) {
     root = new BSTNodeInt(item);
     ++isize;
@@ -31,25 +31,35 @@ bool BSTInt::insert(int item)
   }
 
   BSTNodeInt* curr = root;
+  if(root->data == item) {
+    return false;
+  }
   
   while (curr->left || curr->right) {
     if(!(curr->left) && item < curr->data){
       break;
     }
-    else if(!(curr->right) && item > curr->data){
+    else if(!(curr->right) && curr->data < item){
       break;
     }
     else if (item < curr->data) {
+      localHeight++;
       curr = curr->left;
     }
     else if (curr->data < item) {
+      localHeight++;
       curr = curr->right;
     }
     else {
       return false;
     }
-  }
 
+    if(item == curr->data) {
+      return false;
+    }
+
+  }
+  localHeight++;
   // Ready to insert
   BSTNodeInt* newNode = new BSTNodeInt(item);
   if (item < curr->data) {
@@ -60,7 +70,9 @@ bool BSTInt::insert(int item)
     curr->right = newNode;
     newNode->parent = curr;
   }
-
+  if (heightVar < localHeight) {
+   heightVar = localHeight;
+  }
   ++isize;
   return true;
 
@@ -104,8 +116,6 @@ unsigned int BSTInt::size() const
  */
 unsigned int BSTInt::height() const
 {
-//  heightVar=0;
-  heightHelper(root);
   return heightVar;
 }
 
@@ -122,29 +132,6 @@ bool BSTInt::empty() const
   }
 }
 
-
-/**
- * This is a helper function for the height function. This is recursive.
- *
- */
-
-unsigned int BSTInt::heightHelper(BSTNodeInt* n) const {
-  unsigned int leftCounter = 0;
-  unsigned int rightCounter = 0;
-  if(n->left){
-    leftCounter += heightHelper(n->left);
-  }
-  if(n->right){
-    rightCounter += heightHelper(n->right);
-  }
-  if(rightCounter > heightVar){
-    return rightCounter;
-  }
-  else if(leftCounter > heightVar){
-    return leftCounter;
-  }
-  return 0;
-}
 
 /** do a postorder traversal, deleting nodes
  * This is a helper for the destructor
@@ -167,12 +154,10 @@ void BSTInt::deleteAll(BSTNodeInt* n)
       if(curr->left) {
         delete curr->left;
         curr->left = NULL;
-        cout << "deleting left" << endl;
       }
       else if(curr->right) {
         delete curr->right;
         curr->right = NULL;
-        cout << "deleting" << endl;
       }
     }
     else{

@@ -20,7 +20,7 @@ public:
       It's OK in this case because the method is trivial
       but normally you should AVOID inline definitions.
    */
- BSTInt() : root(0), isize(0) { }
+ BSTInt() : root(0), isize(0), heightVar(0) { }
 
 
   /** Default destructor.
@@ -63,9 +63,6 @@ public:
    */
   bool empty() const;
 
-  unsigned int heightHelper(BSTNodeInt* n) const;
-
-
 
 private:
 
@@ -76,6 +73,7 @@ private:
    *  Cache this number for efficiency. */
   unsigned int isize;
 
+  /** Counter to keep track of the maximum height of the BST */
   unsigned int heightVar;
 
 
