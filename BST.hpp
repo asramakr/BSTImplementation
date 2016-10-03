@@ -122,9 +122,9 @@ std::pair<BSTIterator<Data>, bool> BST<Data>::insert(const Data& item) {
   
   //if there are no nodes in the tree, the first node entered becomes the root
   if (!root) {
-    root = new BSTNodeInt(item);
+    root = new BSTNode<Data>(item);
     ++isize; //size increases by one every time a node is added to the BST
-    return std::pair<BSTIterator<Data>, bool>(BSTIterator<Data>(item), true);
+    return std::pair<BSTIterator<Data>, bool>(BSTIterator<Data>(root), true);
   }
 
   BSTNode<Data>* curr = root;
@@ -212,7 +212,7 @@ BSTIterator<Data> BST<Data>::find(const Data& item) const
   
   BSTNode<Data>* curr = root;
   while (curr) {
-    if (curr->item < item) {
+    if (curr->data < item) {
       curr = curr->right;
     }
     else if (item < curr->data) {
