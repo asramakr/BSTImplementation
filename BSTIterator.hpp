@@ -46,6 +46,8 @@ BSTIterator<Data>::BSTIterator(BSTNode<Data>* curr) {
   // Remember the keyword "this" which stores a pointer to the calling object.
   // It will be helpful to distinguish between the parameter "curr" and the 
   // member variable "curr"
+  
+  this.curr = curr;
 }
 
 /** Dereference operator. */
@@ -77,7 +79,8 @@ bool BSTIterator<Data>::operator==(BSTIterator<Data> const & other) const {
   // Notice that other is a reference and not a pointer, thus it cannot be null
   // Return true if other is NOT equal to the calling object
   // Two iterators are equal if they point to the same BSTNode in the same BST  
-
+  
+  
   return false;
 
 }

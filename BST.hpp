@@ -16,7 +16,7 @@ public:
       Initialize an empty BST.
       This is inlined because it is trivial.
    */
-  BST() : root(nullptr), isize(0) {}
+  BST() : root(nullptr), isize(0), heightVar(0) {}
 
 
   /** Default destructor.
@@ -76,6 +76,9 @@ private:
   
   /** Number of Data items stored in this BST. */
   unsigned int isize;
+  
+  /** Number of maximum height of BST */
+  unsigned int heightVar;
 
   /** Find the first element of the BST
    * Helper function for the begin method above.
@@ -113,8 +116,84 @@ std::pair<BSTIterator<Data>, bool> BST<Data>::insert(const Data& item) {
   // TODO
   // HINT: Copy code from your BSTInt class and change the return value
   // REPLACE THE LINE BELOW
-  return std::pair<BSTIterator<Data>, bool>(BSTIterator<Data>(0), false);
+//  return std::pair<BSTIterator<Data>, bool>(BSTIterator<Data>(0), false);
+ 
+ unsigned int localHeight = 0;
+  
+  //if there are no nodes in the tree, the first node entered becomes the root
+  if (!root) {
+    root = new BSTNodeInt(item);
+    ++isize; //size increases by one every time a node is added to the BST
+    return std::pair<BSTIterator<Data>, bool>(BSTIterator<Data>(item), true);
+  }
 
+  BSTNode<Data>* curr = root;
+
+  if(root->data == item) {
+    //checks if the data is already found in the tree
+    BSTNode<Data>* newNode = new BSTNode<Data>(item);
+    return std::pair<BSTIterator<Data>, bool>(BSTIterator<Data>(newNode), 
+        false);
+  }
+  
+  // loops until it finds the correct spot for the node
+  while (curr->left || curr->right) { 
+
+    // insert as left child of current node if none exists
+    if(!(curr->left) && item < curr->data){
+      break;
+    }
+
+    // insert as right child of current node if none exists
+    else if(!(curr->right) && curr->data < item){
+      break;
+    }
+
+    // move down to left child of current node
+    else if (item < curr->data) {
+      localHeight++; // keep track of height of existing nodes when inserting
+      curr = curr->left;
+    }
+
+    // move down to right child of current node
+    else if (curr->data < item) {
+      localHeight++;
+      curr = curr->right;
+    }
+
+    else {
+      return std::pair<BSTIterator<Data>, bool>(BSTIterator<Data>(0), false);
+    }
+
+    if(item == curr->data) {
+      return std::pair<BSTIterator<Data>, bool>(BSTIterator<Data>(0), false); 
+      //if the data is the same as another node, the insertion stops
+    }
+
+  }
+  localHeight++; 
+  //local height increases when it is placed under a node with no children
+ 
+  // Ready to insert
+  BSTNode<Data>* newNode = new BSTNode<Data>(item);
+
+  // insert the node as left or right child
+  if (item < curr->data) {
+    curr->left = newNode;
+    newNode->parent = curr;
+  }
+  else {
+    curr->right = newNode;
+    newNode->parent = curr;
+  }
+
+  // if new height exceeds original height, update BST height
+  if (heightVar < localHeight) {
+   heightVar = localHeight;
+  }
+  ++isize;
+  return std::pair<BSTIterator<Data>, bool>(BSTIterator<Data>(newNode), true);
+ 
 }
 
 
@@ -130,8 +209,20 @@ BSTIterator<Data> BST<Data>::find(const Data& item) const
 {
   // TODO
   // HINT: Copy code from your BSTInt class and change the return value
+  
+  BSTNode<Data>* curr = root;
+  while (curr) {
+    if (curr->item < item) {
+      curr = curr->right;
+    }
+    else if (item < curr->data) {
+      curr = curr->left;
+    }
+    else {
+      return BSTIterator<Data>(curr);
+    }
+  }
   return BSTIterator<Data>(nullptr);
-
 }
 
   
@@ -150,7 +241,8 @@ unsigned int BST<Data>::height() const
 {
   // TODO
   // HINT: Copy code from your BSTInt class
-  return 0;
+  return heightVar;
+  
 }
 
 
@@ -161,7 +253,14 @@ bool BST<Data>::empty() const
 {
   // TODO
   // HINT: Copy code form your BSTInt class
-  return false;
+  
+  // if the size is 0, the BST is empty
+  if(isize == 0) {
+    return true;
+  }
+  else {
+    return false;
+  }
 }
 
 /** Return an iterator pointing to the first (smallest) item in the BST.
@@ -186,8 +285,16 @@ BSTIterator<Data> BST<Data>::end() const
 template <typename Data>
 BSTNode<Data>* BST<Data>::first(BSTNode<Data>* root)
 {
-  // TODO
-  return nullptr;
+  BSTNode<Data>* curr = root;
+  if (!curr) {
+    return nullptr;
+  }
+  else if (curr->left) {
+    while (curr->left) {
+      curr = curr->left;
+    }
+    return curr;
+  }
 }
 
 /** do a postorder traversal, deleting nodes
@@ -197,6 +304,46 @@ void BST<Data>::deleteAll(BSTNode<Data>* n)
 {
   // TODO
   // HINT: Copy code from your BSTInt class.
+  
+  // set working node for traversal
+  BSTNode<Data>* curr = n;
+
+  // loop while nodes still exist
+  while(curr){
+
+    // loop through left child if it exists
+    if(curr->left){
+      curr = curr->left;
+    }
+
+    // loop through right child if it exists
+    else if(curr->right){
+      curr = curr->right;
+    }
+
+    // found leaf, traverse back up BST through the parent
+    else if(curr->parent){
+
+      curr = curr->parent;
+
+      // delete leaf
+      if(curr->left) {
+        delete curr->left;
+        curr->left = NULL;
+      }
+      else if(curr->right) {
+        delete curr->right;
+        curr->right = NULL;
+      }
+    }
+
+    // delete last node
+    else{
+      delete curr;
+      curr = NULL;
+      break;
+    } 
+  }
 }
 
 
