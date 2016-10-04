@@ -658,6 +658,71 @@ int main() {
         ++it;
     }
 
+    /** Test Iterator 2 */
+    BST<int> btemp2;
+    for (int item : testOfInts1) {
+        // The auto type here is the pair of BSTIterator<int>, bool
+        cout << "Inserting " << item << " into the int template-based BST...";
+        auto p = btemp2.insert(item);
+        if (*(p.first) != item) {
+            cout << "Wrong iterator returned.  "
+                 << "Expected " << item << " but got " << *(p.first) << endl;
+            return -1;
+        }
+        if (!p.second) {
+            cout << "Wrong boolean returned.  Expected true but got " 
+                 << p.second << endl;
+            return -1;
+        }
+        cout << "success!" << endl;
+              
+    }
+
+    // Now test finding the elements we just put in
+    for (int item: testOfInts1) {
+        cout << "Finding " << item << "...." << endl;
+        BSTIterator<int> foundIt = btemp2.find(item);
+        if (*(foundIt) != item) {
+            cout << "incorrect value returned.  Expected iterator pointing to "
+                 << item << " but found iterator pointing to " << *(foundIt) 
+                 << endl;
+            return -1;
+        }
+        cout << "success!" << endl;
+    }
+
+
+
+    // Test the iterator: The iterator should give an in-order traversal
+  
+    // Sort the vector, to compare with inorder iteration on the BST
+    sort(testOfInts1.begin(),testOfInts1.end());
+
+    cout << "traversal using iterator..." << endl;
+    auto testOfInts1Start = testOfInts1.begin();
+    auto testOfInts1End = testOfInts1.end();
+
+    // This is equivalent to BSTIterator<int> en = btemp.end();
+    auto btemp2End = btemp2.end();
+
+    //This is equivalent to BST<int>::iterator it = btemp.begin();
+    auto btemp2Start = btemp2.begin();
+    for(; testOfInts1Start != testOfInts1End; ++testOfInts1Start) {
+        if(! (btemp2Start != btemp2End) ) {
+            cout << *btemp2Start << "," << *testOfInts1Start 
+                 << ": Early termination of BST iteration." << endl;
+            return -1;
+
+        }
+        cout << *btemp2Start << "," << *testOfInts1Start << endl;
+        if(*btemp2Start != *testOfInts1Start) {
+            cout << *btemp2Start << "," << *testOfInts1Start 
+                 << ": Incorrect inorder iteration of BST." << endl;
+       //     return -1;
+        }
+        ++btemp2Start;
+    }
+
     cout << "success!" << endl;
 
     
