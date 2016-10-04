@@ -658,6 +658,28 @@ int main() {
         ++it;
     }
 
+    /* Test size for iterator. */
+    cout << "Size is: " << btemp.size() << endl;
+    if(btemp.size() != v.size()) {
+        cout << "... which is incorrect." << endl;
+        return -1;
+    }
+
+    /* Test height for iterator. */
+    cout << "Height is: " << btemp.height() << endl;
+    if(btemp.height() != 2) {
+        cout << "... which is incorrect." << endl;
+        return -1;
+    }
+
+    /* Test empty() return value. */
+    if(btemp.empty() != false) {
+        cout << "Incorrect return value when checking if empty" << endl;
+        return -1;
+    }
+
+
+
     /** Test Iterator 2 */
     BST<int> btemp2;
     for (int item : testOfInts1) {
@@ -714,13 +736,40 @@ int main() {
             return -1;
 
         }
-        cout << *btemp2Start << "," << *testOfInts1Start << endl;
+        cout << *btemp2Start << endl;
         if(*btemp2Start != *testOfInts1Start) {
             cout << *btemp2Start << "," << *testOfInts1Start 
                  << ": Incorrect inorder iteration of BST." << endl;
             return -1;
         }
         ++btemp2Start;
+    }
+
+    /* Test size. */
+    cout << "Size is: " << btemp2.size() << endl;
+    if(btemp2.size() != testOfInts1.size()) {
+        cout << "... which is incorrect." << endl;
+        return -1;
+    }
+
+    /* Test height. */
+    cout << "Height is: " << btemp2.height() << endl;
+    if(btemp2.height() != 2) {
+        cout << "... which is incorrect." << endl;
+        return -1;
+    }
+
+    /* Test to find return value. */
+    /* Test items that are not in the tree */
+    if(btemp2.find(6) != nullptr) {
+        cout << "Incorrect return value when finding 6" << endl;
+        return -1;
+    } 
+
+    /* Test empty() return value. */
+    if(btemp2.empty() != false) {
+        cout << "Incorrect return value when checking if empty" << endl;
+        return -1;
     }
 
 
@@ -773,8 +822,6 @@ int main() {
     //This is equivalent to BST<int>::iterator it = btemp.begin();
     auto btemp3Start = btemp3.begin();
 
-    cout << "Before: " << *testOfInts2Start << "," << *testOfInts2End << endl;
-
     for(; testOfInts2Start != testOfInts2End; ++testOfInts2Start) {
         if(! (btemp3Start != btemp3End) ) {
             cout << *btemp3Start << "," << *testOfInts2Start 
@@ -782,7 +829,7 @@ int main() {
             return -1;
 
         }
-        cout << *btemp3Start << "," << *testOfInts2Start << endl;
+        cout << *btemp3Start << endl;
         if(*btemp3Start != *testOfInts2Start) {
             cout << *btemp3Start << "," << *testOfInts2Start 
                  << ": Incorrect inorder iteration of BST." << endl;
@@ -790,6 +837,36 @@ int main() {
         }
         ++btemp3Start;
     } 
+
+
+    /* Test size. */
+    cout << "Size is: " << btemp3.size() << endl;
+    if(btemp3.size() != testOfInts2.size()) {
+        cout << "... which is incorrect." << endl;
+        return -1;
+    }
+
+    /* Test height. */
+    cout << "Height is: " << btemp3.height() << endl;
+    if(btemp3.height() != 2) {
+        cout << "... which is incorrect." << endl;
+        return -1;
+    }
+
+
+    /* Test find return value. */
+    /* Test if can find 4 in vector */
+    if (! (btemp3.find(4) != nullptr)) {
+        cout << "Incorrect return value when finding 4" << endl;
+        return -1;
+    }
+
+    /* Test empty() return value. */
+    if(btemp3.empty() != false) {
+        cout << "Incorrect return value when checking if empty" << endl;
+        return -1;
+    }
+
 
 
     /** Test Iterator 4 */
@@ -840,8 +917,6 @@ int main() {
     //This is equivalent to BST<int>::iterator it = btemp.begin();
     auto btemp4Start = btemp4.begin();
 
-    cout << "Before: " << *testOfInts3Start << "," << *testOfInts3End << endl;
-
     for(; testOfInts3Start != testOfInts3End; ++testOfInts3Start) {
         if(! (btemp4Start != btemp4End) ) {
             cout << *btemp4Start << "," << *testOfInts3Start 
@@ -849,7 +924,7 @@ int main() {
             return -1;
 
         }
-        cout << *btemp4Start << "," << *testOfInts3Start << endl;
+        cout << *btemp4Start << endl;
         if(*btemp4Start != *testOfInts3Start) {
             cout << *btemp4Start << "," << *testOfInts3Start 
                  << ": Incorrect inorder iteration of BST." << endl;
@@ -857,6 +932,38 @@ int main() {
         }
         ++btemp4Start;
     } 
+
+
+    /* Test size. */
+    cout << "Size is: " << btemp4.size() << endl;
+    if(btemp4.size() != testOfInts3.size()) {
+        cout << "... which is incorrect." << endl;
+        return -1;
+    }
+
+    /* Test height. */
+    cout << "Height is: " << btemp4.height() << endl;
+    if(btemp4.height() != 2) {
+        cout << "... which is incorrect." << endl;
+        return -1;
+    }
+
+
+    /* Test find return value. */
+    /* Test if can find 2 in vector */
+    if (! (btemp4.find(2) != nullptr)) {
+        cout << "Incorrect return value when finding 2" << endl;
+        return -1;
+    }
+
+
+    /* Test empty() return value. */
+    if(btemp4.empty() != false) {
+        cout << "Incorrect return value when checking if empty" << endl;
+        return -1;
+    }
+
+
 
     /** Test Iterator 5 */
     BST<int> btemp5;
@@ -913,7 +1020,7 @@ int main() {
             return -1;
 
         }
-        cout << *btemp5Start << "," << *testOfInts4Start << endl;
+        cout << *btemp5Start << endl;
         if(*btemp5Start != *testOfInts4Start) {
             cout << *btemp5Start << "," << *testOfInts4Start 
                  << ": Incorrect inorder iteration of BST." << endl;
@@ -921,6 +1028,35 @@ int main() {
         }
         ++btemp5Start;
     } 
+
+    /* Test size. */
+    cout << "Size is: " << btemp5.size() << endl;
+    if(btemp5.size() != testOfInts4.size()) {
+        cout << "... which is incorrect." << endl;
+        return -1;
+    }
+
+    /* Test height. */
+    cout << "Height is: " << btemp5.height() << endl;
+    if(btemp5.height() != 0) {
+        cout << "... which is incorrect." << endl;
+        return -1;
+    }
+
+
+    /* Test find return value. */
+    // Test the items that are not in tree
+    if((btemp5.find(1) != nullptr)) {
+        cout << "Incorrect return value when finding 1" << endl;
+        return -1;
+    }
+    
+    /* Test empty() return value. */
+    if(btemp5.empty() != true) {
+        cout << "Incorrect return value when checking if empty" << endl;
+        return -1;
+    }
+
 
 
     /** Test Iterator 6 */
@@ -971,8 +1107,6 @@ int main() {
     //This is equivalent to BST<int>::iterator it = btemp.begin();
     auto btemp6Start = btemp6.begin();
 
-    cout << "Before: " << *testOfInts5Start << "," << *testOfInts5End << endl;
-
     for(; testOfInts5Start != testOfInts5End; ++testOfInts5Start) {
         if(! (btemp6Start != btemp6End) ) {
             cout << *btemp6Start << "," << *testOfInts5Start 
@@ -980,7 +1114,7 @@ int main() {
             return -1;
 
         }
-        cout << *btemp6Start << "," << *testOfInts5Start << endl;
+        cout << *btemp6Start << endl;
         if(*btemp6Start != *testOfInts5Start) {
             cout << *btemp6Start << "," << *testOfInts5Start 
                  << ": Incorrect inorder iteration of BST." << endl;
@@ -988,6 +1122,35 @@ int main() {
         }
         ++btemp6Start;
     } 
+
+
+    /* Test size. */
+    cout << "Size is: " << btemp6.size() << endl;
+    if(btemp6.size() != testOfInts5.size()) {
+        cout << "... which is incorrect." << endl;
+        return -1;
+    }
+
+    /* Test height. */
+    cout << "Height is: " << btemp6.height() << endl;
+    if(btemp6.height() != 2) {
+        cout << "... which is incorrect." << endl;
+        return -1;
+    }
+
+    /* Test find return value. */
+    /* Test if can find 3, which isn't in vector */
+    if ((btemp6.find(3) != nullptr)) {
+        cout << "Incorrect return value when finding 3" << endl;
+        return -1;
+    }
+
+   
+    /* Test empty() return value. */
+    if(btemp6.empty() != false) {
+        cout << "Incorrect return value when checking if empty" << endl;
+        return -1;
+    }
 
 
 
@@ -1039,8 +1202,6 @@ int main() {
     //This is equivalent to BST<int>::iterator it = btemp.begin();
     auto btemp7Start = btemp7.begin();
 
-    cout << "Before: " << *testOfInts6Start << "," << *testOfInts6End << endl;
-
     for(; testOfInts6Start != testOfInts6End; ++testOfInts6Start) {
         if(! (btemp7Start != btemp7End) ) {
             cout << *btemp7Start << "," << *testOfInts6Start 
@@ -1048,7 +1209,7 @@ int main() {
             return -1;
 
         }
-        cout << *btemp7Start << "," << *testOfInts6Start << endl;
+        cout << *btemp7Start << endl;
         if(*btemp7Start != *testOfInts6Start) {
             cout << *btemp7Start << "," << *testOfInts6Start 
                  << ": Incorrect inorder iteration of BST." << endl;
@@ -1056,6 +1217,48 @@ int main() {
         }
         ++btemp7Start;
     } 
+
+    /* Test duplicate insertion */
+    if(((btemp7.insert(5).first) != (nullptr)) && (btemp7.insert(5).second != 
+            false)) {
+        cout << "Incorrect insertion of duplicate" << endl;
+    }
+
+    /* Test duplicate insertion */
+    if((btemp7.insert(2).first != (nullptr)) && (btemp7.insert(2).second != 
+            false)) {
+        cout << "Incorrect insertion of duplicate" << endl;
+    }
+
+
+    /* Test size. */
+    cout << "Size is: " << btemp7.size() << endl;
+    if(btemp7.size() != testOfInts6.size()) {
+        cout << "... which is incorrect." << endl;
+        return -1;
+    }
+
+    /* Test height. */
+    cout << "Height is: " << btemp7.height() << endl;
+    if(btemp7.height() != 1) {
+        cout << "... which is incorrect." << endl;
+        return -1;
+    }
+
+    /* Test find return value. */
+    /* Test if can find 3, which isn't in vector */
+    if (btemp7.find(3) != nullptr) {
+        cout << "Incorrect return value when finding 3" << endl;
+        return -1;
+    }
+
+   
+    /* Test empty() return value. */
+    if(btemp7.empty() != false) {
+        cout << "Incorrect return value when checking if empty" << endl;
+        return -1;
+    }
+
 
 
     /** Test Iterator 8 */
@@ -1106,8 +1309,6 @@ int main() {
     //This is equivalent to BST<int>::iterator it = btemp.begin();
     auto btemp8Start = btemp8.begin();
 
-    cout << "Before: " << *testOfInts7Start << "," << *testOfInts7End << endl;
-
     for(; testOfInts7Start != testOfInts7End; ++testOfInts7Start) {
         if(! (btemp8Start != btemp8End) ) {
             cout << *btemp8Start << "," << *testOfInts7Start 
@@ -1115,7 +1316,7 @@ int main() {
             return -1;
 
         }
-        cout << *btemp8Start << "," << *testOfInts7Start << endl;
+        cout << *btemp8Start << endl;
         if(*btemp8Start != *testOfInts7Start) {
             cout << *btemp8Start << "," << *testOfInts7Start 
                  << ": Incorrect inorder iteration of BST." << endl;
@@ -1123,6 +1324,41 @@ int main() {
         }
         ++btemp8Start;
     } 
+
+   /* Test duplicate insertion */
+    if((btemp8.insert(5).first != nullptr) && (btemp8.insert(5).second !=
+            false)) {
+        cout << "Incorrect insertion of duplicate" << endl;
+    }
+
+    /* Test size. */
+    cout << "Size is: " << btemp8.size() << endl;
+    if(btemp8.size() != testOfInts7.size()) {
+        cout << "... which is incorrect." << endl;
+        return -1;
+    }
+
+    /* Test height. */
+    cout << "Height is: " << btemp8.height() << endl;
+    if(btemp8.height() != 0) {
+        cout << "... which is incorrect." << endl;
+        return -1;
+    }
+
+    /* Test find return value. */
+    /* Test if can find 3, which isn't in vector */
+    if (btemp8.find(3) != nullptr) {
+        cout << "Incorrect return value when finding 3" << endl;
+        return -1;
+    }
+
+   
+    /* Test empty() return value. */
+    if(btemp8.empty() != false) {
+        cout << "Incorrect return value when checking if empty" << endl;
+        return -1;
+    }
+
 
 
     /** Test Iterator 9 */
@@ -1173,8 +1409,6 @@ int main() {
     //This is equivalent to BST<int>::iterator it = btemp.begin();
     auto btemp9Start = btemp9.begin();
 
-    cout << "Before: " << *testOfInts8Start << "," << *testOfInts8End << endl;
-
     for(; testOfInts8Start != testOfInts8End; ++testOfInts8Start) {
         if(! (btemp9Start != btemp9End) ) {
             cout << *btemp9Start << "," << *testOfInts8Start 
@@ -1182,7 +1416,7 @@ int main() {
             return -1;
 
         }
-        cout << *btemp9Start << "," << *testOfInts8Start << endl;
+        cout << *btemp9Start <<  endl;
         if(*btemp9Start != *testOfInts8Start) {
             cout << *btemp9Start << "," << *testOfInts8Start 
                  << ": Incorrect inorder iteration of BST." << endl;
@@ -1190,6 +1424,41 @@ int main() {
         }
         ++btemp9Start;
     } 
+
+    /* Test duplicate insertion */
+    if((btemp9.insert(5).first != nullptr) && (btemp9.insert(5).second != 
+            false)) {
+        cout << "Incorrect insertion of duplicate" << endl;
+    }
+
+    /* Test size. */
+    cout << "Size is: " << btemp9.size() << endl;
+    if(btemp9.size() != testOfInts8.size()) {
+        cout << "... which is incorrect." << endl;
+        return -1;
+    }
+
+    /* Test height. */
+    cout << "Height is: " << btemp9.height() << endl;
+    if(btemp9.height() != 4) {
+        cout << "... which is incorrect." << endl;
+        return -1;
+    }
+
+    /* Test find return value. */
+    /* Test if can find 3, which isn't in vector */
+    if (btemp9.find(6) != nullptr) {
+        cout << "Incorrect return value when finding 6" << endl;
+        return -1;
+    }
+
+   
+    /* Test empty() return value. */
+    if(btemp9.empty() != false) {
+        cout << "Incorrect return value when checking if empty" << endl;
+        return -1;
+    }
+
 
 
     /** Test Iterator 10 */
@@ -1240,8 +1509,6 @@ int main() {
     //This is equivalent to BST<int>::iterator it = btemp.begin();
     auto btemp10Start = btemp10.begin();
 
-    cout << "Before: " << *testOfInts9Start << "," << *testOfInts9End << endl;
-
     for(; testOfInts9Start != testOfInts9End; ++testOfInts9Start) {
         if(! (btemp10Start != btemp10End) ) {
             cout << *btemp10Start << "," << *testOfInts9Start 
@@ -1249,7 +1516,7 @@ int main() {
             return -1;
 
         }
-        cout << *btemp10Start << "," << *testOfInts9Start << endl;
+        cout << *btemp10Start <<  endl;
         if(*btemp10Start != *testOfInts9Start) {
             cout << *btemp10Start << "," << *testOfInts9Start 
                  << ": Incorrect inorder iteration of BST." << endl;
@@ -1258,13 +1525,42 @@ int main() {
         ++btemp10Start;
     } 
 
+    /* Test duplicate insertion */
+    if((btemp10.insert(8).first != nullptr) && (btemp10.insert(8).second != 
+            false)) {
+        cout << "Incorrect insertion of duplicate" << endl;
+    }
+
+    /* Test size. */
+    cout << "Size is: " << btemp10.size() << endl;
+    if(btemp10.size() != testOfInts9.size()) {
+        cout << "... which is incorrect." << endl;
+        return -1;
+    }
+
+    /* Test height. */
+    cout << "Height is: " << btemp10.height() << endl;
+    if(btemp10.height() != 3) {
+        cout << "... which is incorrect." << endl;
+        return -1;
+    }
+
+    /* Test find return value. */
+    /* Test if can find 5, which isn't in vector */
+    if (btemp10.find(5) != nullptr) {
+        cout << "Incorrect return value when finding 6" << endl;
+        return -1;
+    }
+
+   
+    /* Test empty() return value. */
+    if(btemp10.empty() != false) {
+        cout << "Incorrect return value when checking if empty" << endl;
+        return -1;
+    }
+
 
     cout << "success!" << endl;
-
-    
-
-    // ADD MORE TESTS HERE.  You might also want to change what is input
-    // into the vector v.
 
     cout << "All tests passed!" << endl;
     return 0;
