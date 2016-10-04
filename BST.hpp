@@ -269,6 +269,9 @@ bool BST<Data>::empty() const
 template <typename Data>
 BSTIterator<Data> BST<Data>::begin() const
 {
+  if (!root) {
+    return NULL;
+  }
   return BSTIterator<Data>(first(root));
 }
 
@@ -287,9 +290,9 @@ template <typename Data>
 BSTNode<Data>* BST<Data>::first(BSTNode<Data>* root)
 {
   BSTNode<Data>* curr = root;
-/*  if (!curr) {
+  if (!curr) {
     return nullptr;
-  } */
+  } 
   if (curr->left) {
     while (curr->left) {
       curr = curr->left;

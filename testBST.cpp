@@ -692,7 +692,6 @@ int main() {
     }
 
 
-
     // Test the iterator: The iterator should give an in-order traversal
   
     // Sort the vector, to compare with inorder iteration on the BST
@@ -707,6 +706,7 @@ int main() {
 
     //This is equivalent to BST<int>::iterator it = btemp.begin();
     auto btemp2Start = btemp2.begin();
+
     for(; testOfInts1Start != testOfInts1End; ++testOfInts1Start) {
         if(! (btemp2Start != btemp2End) ) {
             cout << *btemp2Start << "," << *testOfInts1Start 
@@ -718,10 +718,546 @@ int main() {
         if(*btemp2Start != *testOfInts1Start) {
             cout << *btemp2Start << "," << *testOfInts1Start 
                  << ": Incorrect inorder iteration of BST." << endl;
-       //     return -1;
+            return -1;
         }
         ++btemp2Start;
     }
+
+
+
+    /** Test Iterator 3 */
+    BST<int> btemp3;
+    for (int item : testOfInts2) {
+        // The auto type here is the pair of BSTIterator<int>, bool
+        cout << "Inserting " << item << " into the int template-based BST...";
+        auto p = btemp3.insert(item);
+        if (*(p.first) != item) {
+            cout << "Wrong iterator returned.  "
+                 << "Expected " << item << " but got " << *(p.first) << endl;
+            return -1;
+        }
+        if (!p.second) {
+            cout << "Wrong boolean returned.  Expected true but got " 
+                 << p.second << endl;
+            return -1;
+        }
+        cout << "success!" << endl;
+              
+    }
+
+    // Now test finding the elements we just put in
+    for (int item: testOfInts2) {
+        cout << "Finding " << item << "...." << endl;
+        BSTIterator<int> foundIt = btemp3.find(item);
+        if (*(foundIt) != item) {
+            cout << "incorrect value returned.  Expected iterator pointing to "
+                 << item << " but found iterator pointing to " << *(foundIt) 
+                 << endl;
+            return -1;
+        }
+        cout << "success!" << endl;
+    }
+
+    // Test the iterator: The iterator should give an in-order traversal
+  
+    // Sort the vector, to compare with inorder iteration on the BST
+    sort(testOfInts2.begin(),testOfInts2.end());
+
+    cout << "traversal using iterator..." << endl;
+    auto testOfInts2Start = testOfInts2.begin();
+    auto testOfInts2End = testOfInts2.end();
+
+    // This is equivalent to BSTIterator<int> en = btemp.end();
+    auto btemp3End = btemp3.end();
+
+    //This is equivalent to BST<int>::iterator it = btemp.begin();
+    auto btemp3Start = btemp3.begin();
+
+    cout << "Before: " << *testOfInts2Start << "," << *testOfInts2End << endl;
+
+    for(; testOfInts2Start != testOfInts2End; ++testOfInts2Start) {
+        if(! (btemp3Start != btemp3End) ) {
+            cout << *btemp3Start << "," << *testOfInts2Start 
+                 << ": Early termination of BST iteration." << endl;
+            return -1;
+
+        }
+        cout << *btemp3Start << "," << *testOfInts2Start << endl;
+        if(*btemp3Start != *testOfInts2Start) {
+            cout << *btemp3Start << "," << *testOfInts2Start 
+                 << ": Incorrect inorder iteration of BST." << endl;
+            return -1;
+        }
+        ++btemp3Start;
+    } 
+
+
+    /** Test Iterator 4 */
+    BST<int> btemp4;
+    for (int item : testOfInts3) {
+        // The auto type here is the pair of BSTIterator<int>, bool
+        cout << "Inserting " << item << " into the int template-based BST...";
+        auto p = btemp4.insert(item);
+        if (*(p.first) != item) {
+            cout << "Wrong iterator returned.  "
+                 << "Expected " << item << " but got " << *(p.first) << endl;
+            return -1;
+        }
+        if (!p.second) {
+            cout << "Wrong boolean returned.  Expected true but got " 
+                 << p.second << endl;
+            return -1;
+        }
+        cout << "success!" << endl;
+              
+    }
+
+    // Now test finding the elements we just put in
+    for (int item: testOfInts3) {
+        cout << "Finding " << item << "...." << endl;
+        BSTIterator<int> foundIt = btemp4.find(item);
+        if (*(foundIt) != item) {
+            cout << "incorrect value returned.  Expected iterator pointing to "
+                 << item << " but found iterator pointing to " << *(foundIt) 
+                 << endl;
+            return -1;
+        }
+        cout << "success!" << endl;
+    }
+
+    // Test the iterator: The iterator should give an in-order traversal
+  
+    // Sort the vector, to compare with inorder iteration on the BST
+    sort(testOfInts3.begin(),testOfInts3.end());
+
+    cout << "traversal using iterator..." << endl;
+    auto testOfInts3Start = testOfInts3.begin();
+    auto testOfInts3End = testOfInts3.end();
+
+    // This is equivalent to BSTIterator<int> en = btemp.end();
+    auto btemp4End = btemp4.end();
+
+    //This is equivalent to BST<int>::iterator it = btemp.begin();
+    auto btemp4Start = btemp4.begin();
+
+    cout << "Before: " << *testOfInts3Start << "," << *testOfInts3End << endl;
+
+    for(; testOfInts3Start != testOfInts3End; ++testOfInts3Start) {
+        if(! (btemp4Start != btemp4End) ) {
+            cout << *btemp4Start << "," << *testOfInts3Start 
+                 << ": Early termination of BST iteration." << endl;
+            return -1;
+
+        }
+        cout << *btemp4Start << "," << *testOfInts3Start << endl;
+        if(*btemp4Start != *testOfInts3Start) {
+            cout << *btemp4Start << "," << *testOfInts3Start 
+                 << ": Incorrect inorder iteration of BST." << endl;
+            return -1;
+        }
+        ++btemp4Start;
+    } 
+
+    /** Test Iterator 5 */
+    BST<int> btemp5;
+    for (int item : testOfInts4) {
+        // The auto type here is the pair of BSTIterator<int>, bool
+        cout << "Inserting " << item << " into the int template-based BST...";
+        auto p = btemp5.insert(item);
+        if (*(p.first) != item) {
+            cout << "Wrong iterator returned.  "
+                 << "Expected " << item << " but got " << *(p.first) << endl;
+            return -1;
+        }
+        if (!p.second) {
+            cout << "Wrong boolean returned.  Expected true but got " 
+                 << p.second << endl;
+            return -1;
+        }
+        cout << "success!" << endl;
+              
+    }
+
+    // Now test finding the elements we just put in
+    for (int item: testOfInts4) {
+        cout << "Finding " << item << "...." << endl;
+        BSTIterator<int> foundIt = btemp5.find(item);
+        if (*(foundIt) != item) {
+            cout << "incorrect value returned.  Expected iterator pointing to "
+                 << item << " but found iterator pointing to " << *(foundIt) 
+                 << endl;
+            return -1;
+        }
+        cout << "success!" << endl;
+    }
+
+    // Test the iterator: The iterator should give an in-order traversal
+  
+    // Sort the vector, to compare with inorder iteration on the BST
+    sort(testOfInts4.begin(),testOfInts4.end());
+
+    cout << "traversal using iterator..." << endl;
+    auto testOfInts4Start = testOfInts4.begin();
+    auto testOfInts4End = testOfInts4.end();
+
+    // This is equivalent to BSTIterator<int> en = btemp.end();
+    auto btemp5End = btemp5.end();
+
+    //This is equivalent to BST<int>::iterator it = btemp.begin();
+    auto btemp5Start = btemp5.begin();
+
+    for(; testOfInts4Start != testOfInts4End; ++testOfInts4Start) {
+        if(! (btemp5Start != btemp5End) ) {
+            cout << *btemp5Start << "," << *testOfInts4Start 
+                 << ": Early termination of BST iteration." << endl;
+            return -1;
+
+        }
+        cout << *btemp5Start << "," << *testOfInts4Start << endl;
+        if(*btemp5Start != *testOfInts4Start) {
+            cout << *btemp5Start << "," << *testOfInts4Start 
+                 << ": Incorrect inorder iteration of BST." << endl;
+            return -1;
+        }
+        ++btemp5Start;
+    } 
+
+
+    /** Test Iterator 6 */
+    BST<int> btemp6;
+    for (int item : testOfInts5) {
+        // The auto type here is the pair of BSTIterator<int>, bool
+        cout << "Inserting " << item << " into the int template-based BST...";
+        auto p = btemp6.insert(item);
+        if (*(p.first) != item) {
+            cout << "Wrong iterator returned.  "
+                 << "Expected " << item << " but got " << *(p.first) << endl;
+            return -1;
+        }
+        if (!p.second) {
+            cout << "Wrong boolean returned.  Expected true but got " 
+                 << p.second << endl;
+            return -1;
+        }
+        cout << "success!" << endl;
+              
+    }
+
+    // Now test finding the elements we just put in
+    for (int item: testOfInts5) {
+        cout << "Finding " << item << "...." << endl;
+        BSTIterator<int> foundIt = btemp6.find(item);
+        if (*(foundIt) != item) {
+            cout << "incorrect value returned.  Expected iterator pointing to "
+                 << item << " but found iterator pointing to " << *(foundIt) 
+                 << endl;
+            return -1;
+        }
+        cout << "success!" << endl;
+    }
+
+    // Test the iterator: The iterator should give an in-order traversal
+  
+    // Sort the vector, to compare with inorder iteration on the BST
+    sort(testOfInts5.begin(),testOfInts5.end());
+
+    cout << "traversal using iterator..." << endl;
+    auto testOfInts5Start = testOfInts5.begin();
+    auto testOfInts5End = testOfInts5.end();
+
+    // This is equivalent to BSTIterator<int> en = btemp.end();
+    auto btemp6End = btemp6.end();
+
+    //This is equivalent to BST<int>::iterator it = btemp.begin();
+    auto btemp6Start = btemp6.begin();
+
+    cout << "Before: " << *testOfInts5Start << "," << *testOfInts5End << endl;
+
+    for(; testOfInts5Start != testOfInts5End; ++testOfInts5Start) {
+        if(! (btemp6Start != btemp6End) ) {
+            cout << *btemp6Start << "," << *testOfInts5Start 
+                 << ": Early termination of BST iteration." << endl;
+            return -1;
+
+        }
+        cout << *btemp6Start << "," << *testOfInts5Start << endl;
+        if(*btemp6Start != *testOfInts5Start) {
+            cout << *btemp6Start << "," << *testOfInts5Start 
+                 << ": Incorrect inorder iteration of BST." << endl;
+            return -1;
+        }
+        ++btemp6Start;
+    } 
+
+
+
+    /** Test Iterator 7 */
+    BST<int> btemp7;
+    for (int item : testOfInts6) {
+        // The auto type here is the pair of BSTIterator<int>, bool
+        cout << "Inserting " << item << " into the int template-based BST...";
+        auto p = btemp7.insert(item);
+        if (*(p.first) != item) {
+            cout << "Wrong iterator returned.  "
+                 << "Expected " << item << " but got " << *(p.first) << endl;
+            return -1;
+        }
+        if (!p.second) {
+            cout << "Wrong boolean returned.  Expected true but got " 
+                 << p.second << endl;
+            return -1;
+        }
+        cout << "success!" << endl;
+              
+    }
+
+    // Now test finding the elements we just put in
+    for (int item: testOfInts6) {
+        cout << "Finding " << item << "...." << endl;
+        BSTIterator<int> foundIt = btemp7.find(item);
+        if (*(foundIt) != item) {
+            cout << "incorrect value returned.  Expected iterator pointing to "
+                 << item << " but found iterator pointing to " << *(foundIt) 
+                 << endl;
+            return -1;
+        }
+        cout << "success!" << endl;
+    }
+
+    // Test the iterator: The iterator should give an in-order traversal
+  
+    // Sort the vector, to compare with inorder iteration on the BST
+    sort(testOfInts6.begin(),testOfInts6.end());
+
+    cout << "traversal using iterator..." << endl;
+    auto testOfInts6Start = testOfInts6.begin();
+    auto testOfInts6End = testOfInts6.end();
+
+    // This is equivalent to BSTIterator<int> en = btemp.end();
+    auto btemp7End = btemp7.end();
+
+    //This is equivalent to BST<int>::iterator it = btemp.begin();
+    auto btemp7Start = btemp7.begin();
+
+    cout << "Before: " << *testOfInts6Start << "," << *testOfInts6End << endl;
+
+    for(; testOfInts6Start != testOfInts6End; ++testOfInts6Start) {
+        if(! (btemp7Start != btemp7End) ) {
+            cout << *btemp7Start << "," << *testOfInts6Start 
+                 << ": Early termination of BST iteration." << endl;
+            return -1;
+
+        }
+        cout << *btemp7Start << "," << *testOfInts6Start << endl;
+        if(*btemp7Start != *testOfInts6Start) {
+            cout << *btemp7Start << "," << *testOfInts6Start 
+                 << ": Incorrect inorder iteration of BST." << endl;
+            return -1;
+        }
+        ++btemp7Start;
+    } 
+
+
+    /** Test Iterator 8 */
+    BST<int> btemp8;
+    for (int item : testOfInts7) {
+        // The auto type here is the pair of BSTIterator<int>, bool
+        cout << "Inserting " << item << " into the int template-based BST...";
+        auto p = btemp8.insert(item);
+        if (*(p.first) != item) {
+            cout << "Wrong iterator returned.  "
+                 << "Expected " << item << " but got " << *(p.first) << endl;
+            return -1;
+        }
+        if (!p.second) {
+            cout << "Wrong boolean returned.  Expected true but got " 
+                 << p.second << endl;
+            return -1;
+        }
+        cout << "success!" << endl;
+              
+    }
+
+    // Now test finding the elements we just put in
+    for (int item: testOfInts7) {
+        cout << "Finding " << item << "...." << endl;
+        BSTIterator<int> foundIt = btemp8.find(item);
+        if (*(foundIt) != item) {
+            cout << "incorrect value returned.  Expected iterator pointing to "
+                 << item << " but found iterator pointing to " << *(foundIt) 
+                 << endl;
+            return -1;
+        }
+        cout << "success!" << endl;
+    }
+
+    // Test the iterator: The iterator should give an in-order traversal
+  
+    // Sort the vector, to compare with inorder iteration on the BST
+    sort(testOfInts7.begin(),testOfInts7.end());
+
+    cout << "traversal using iterator..." << endl;
+    auto testOfInts7Start = testOfInts7.begin();
+    auto testOfInts7End = testOfInts7.end();
+
+    // This is equivalent to BSTIterator<int> en = btemp.end();
+    auto btemp8End = btemp8.end();
+
+    //This is equivalent to BST<int>::iterator it = btemp.begin();
+    auto btemp8Start = btemp8.begin();
+
+    cout << "Before: " << *testOfInts7Start << "," << *testOfInts7End << endl;
+
+    for(; testOfInts7Start != testOfInts7End; ++testOfInts7Start) {
+        if(! (btemp8Start != btemp8End) ) {
+            cout << *btemp8Start << "," << *testOfInts7Start 
+                 << ": Early termination of BST iteration." << endl;
+            return -1;
+
+        }
+        cout << *btemp8Start << "," << *testOfInts7Start << endl;
+        if(*btemp8Start != *testOfInts7Start) {
+            cout << *btemp8Start << "," << *testOfInts7Start 
+                 << ": Incorrect inorder iteration of BST." << endl;
+            return -1;
+        }
+        ++btemp8Start;
+    } 
+
+
+    /** Test Iterator 9 */
+    BST<int> btemp9;
+    for (int item : testOfInts8) {
+        // The auto type here is the pair of BSTIterator<int>, bool
+        cout << "Inserting " << item << " into the int template-based BST...";
+        auto p = btemp9.insert(item);
+        if (*(p.first) != item) {
+            cout << "Wrong iterator returned.  "
+                 << "Expected " << item << " but got " << *(p.first) << endl;
+            return -1;
+        }
+        if (!p.second) {
+            cout << "Wrong boolean returned.  Expected true but got " 
+                 << p.second << endl;
+            return -1;
+        }
+        cout << "success!" << endl;
+              
+    }
+
+    // Now test finding the elements we just put in
+    for (int item: testOfInts8) {
+        cout << "Finding " << item << "...." << endl;
+        BSTIterator<int> foundIt = btemp9.find(item);
+        if (*(foundIt) != item) {
+            cout << "incorrect value returned.  Expected iterator pointing to "
+                 << item << " but found iterator pointing to " << *(foundIt) 
+                 << endl;
+            return -1;
+        }
+        cout << "success!" << endl;
+    }
+
+    // Test the iterator: The iterator should give an in-order traversal
+  
+    // Sort the vector, to compare with inorder iteration on the BST
+    sort(testOfInts8.begin(),testOfInts8.end());
+
+    cout << "traversal using iterator..." << endl;
+    auto testOfInts8Start = testOfInts8.begin();
+    auto testOfInts8End = testOfInts8.end();
+
+    // This is equivalent to BSTIterator<int> en = btemp.end();
+    auto btemp9End = btemp9.end();
+
+    //This is equivalent to BST<int>::iterator it = btemp.begin();
+    auto btemp9Start = btemp9.begin();
+
+    cout << "Before: " << *testOfInts8Start << "," << *testOfInts8End << endl;
+
+    for(; testOfInts8Start != testOfInts8End; ++testOfInts8Start) {
+        if(! (btemp9Start != btemp9End) ) {
+            cout << *btemp9Start << "," << *testOfInts8Start 
+                 << ": Early termination of BST iteration." << endl;
+            return -1;
+
+        }
+        cout << *btemp9Start << "," << *testOfInts8Start << endl;
+        if(*btemp9Start != *testOfInts8Start) {
+            cout << *btemp9Start << "," << *testOfInts8Start 
+                 << ": Incorrect inorder iteration of BST." << endl;
+            return -1;
+        }
+        ++btemp9Start;
+    } 
+
+
+    /** Test Iterator 10 */
+    BST<int> btemp10;
+    for (int item : testOfInts9) {
+        // The auto type here is the pair of BSTIterator<int>, bool
+        cout << "Inserting " << item << " into the int template-based BST...";
+        auto p = btemp10.insert(item);
+        if (*(p.first) != item) {
+            cout << "Wrong iterator returned.  "
+                 << "Expected " << item << " but got " << *(p.first) << endl;
+            return -1;
+        }
+        if (!p.second) {
+            cout << "Wrong boolean returned.  Expected true but got " 
+                 << p.second << endl;
+            return -1;
+        }
+        cout << "success!" << endl;
+              
+    }
+
+    // Now test finding the elements we just put in
+    for (int item: testOfInts9) {
+        cout << "Finding " << item << "...." << endl;
+        BSTIterator<int> foundIt = btemp10.find(item);
+        if (*(foundIt) != item) {
+            cout << "incorrect value returned.  Expected iterator pointing to "
+                 << item << " but found iterator pointing to " << *(foundIt) 
+                 << endl;
+            return -1;
+        }
+        cout << "success!" << endl;
+    }
+
+    // Test the iterator: The iterator should give an in-order traversal
+  
+    // Sort the vector, to compare with inorder iteration on the BST
+    sort(testOfInts9.begin(),testOfInts9.end());
+
+    cout << "traversal using iterator..." << endl;
+    auto testOfInts9Start = testOfInts9.begin();
+    auto testOfInts9End = testOfInts9.end();
+
+    // This is equivalent to BSTIterator<int> en = btemp.end();
+    auto btemp10End = btemp10.end();
+
+    //This is equivalent to BST<int>::iterator it = btemp.begin();
+    auto btemp10Start = btemp10.begin();
+
+    cout << "Before: " << *testOfInts9Start << "," << *testOfInts9End << endl;
+
+    for(; testOfInts9Start != testOfInts9End; ++testOfInts9Start) {
+        if(! (btemp10Start != btemp10End) ) {
+            cout << *btemp10Start << "," << *testOfInts9Start 
+                 << ": Early termination of BST iteration." << endl;
+            return -1;
+
+        }
+        cout << *btemp10Start << "," << *testOfInts9Start << endl;
+        if(*btemp10Start != *testOfInts9Start) {
+            cout << *btemp10Start << "," << *testOfInts9Start 
+                 << ": Incorrect inorder iteration of BST." << endl;
+            return -1;
+        }
+        ++btemp10Start;
+    } 
+
 
     cout << "success!" << endl;
 

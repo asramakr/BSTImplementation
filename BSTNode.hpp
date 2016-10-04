@@ -5,7 +5,7 @@
 
 /** Starter code for PA1, CSE 100 2016
  * Authors: Christine Alvarado, based on code by Paul Kube 
- * ADD YOUR NAME AS AN AUTHOR HERE
+ * Authors: Alexis Atianzar & Arun Ramakrishnan
  */
 
 template<typename Data>
@@ -47,6 +47,7 @@ template <typename Data>
 BSTNode<Data>* BSTNode<Data>::successor()
 {
   //TODO
+
   if (right) {
     BSTNode<Data>* localLeft = right;
     while(localLeft->left){
@@ -54,11 +55,12 @@ BSTNode<Data>* BSTNode<Data>::successor()
     }
     return localLeft;
   }
-  else if (this->data < (parent)->data){
-    return parent;
-  }
-  else if ((parent)->data < this->data) {
-    BSTNode<Data>* localParent = parent;
+  else if (parent != NULL) {
+    if (this->data < (parent)->data){
+      return parent;
+    }
+    else if ((parent)->data < this->data) {
+      BSTNode<Data>* localParent = parent;
       while (localParent) {
         if ((localParent)->data < this->data) {
           localParent =  (localParent)->parent;
@@ -69,7 +71,8 @@ BSTNode<Data>* BSTNode<Data>::successor()
         }
       }
     }
-  return nullptr;
+  }
+  return 0;
 }
 
 /** Overload operator<< to print a BSTNode's fields to an ostream. */
