@@ -131,8 +131,7 @@ std::pair<BSTIterator<Data>, bool> BST<Data>::insert(const Data& item) {
 
   if(root->data == item) {
     //checks if the data is already found in the tree
-    BSTNode<Data>* newNode = new BSTNode<Data>(item);
-    return std::pair<BSTIterator<Data>, bool>(BSTIterator<Data>(newNode), 
+    return std::pair<BSTIterator<Data>, bool>(BSTIterator<Data>(nullptr), 
         false);
   }
   
@@ -162,11 +161,13 @@ std::pair<BSTIterator<Data>, bool> BST<Data>::insert(const Data& item) {
     }
 
     else {
-      return std::pair<BSTIterator<Data>, bool>(BSTIterator<Data>(0), false);
+      return std::pair<BSTIterator<Data>, bool>(BSTIterator<Data>(nullptr), 
+          false);
     }
 
     if(item == curr->data) {
-      return std::pair<BSTIterator<Data>, bool>(BSTIterator<Data>(0), false); 
+      return std::pair<BSTIterator<Data>, bool>(BSTIterator<Data>(nullptr), 
+          false); 
       //if the data is the same as another node, the insertion stops
     }
 
@@ -286,13 +287,16 @@ template <typename Data>
 BSTNode<Data>* BST<Data>::first(BSTNode<Data>* root)
 {
   BSTNode<Data>* curr = root;
-  if (!curr) {
+/*  if (!curr) {
     return nullptr;
-  }
-  else if (curr->left) {
+  } */
+  if (curr->left) {
     while (curr->left) {
       curr = curr->left;
     }
+    return curr;
+  }
+  else {
     return curr;
   }
 }
