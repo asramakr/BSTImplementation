@@ -1,3 +1,14 @@
+/**
+ * Filename: BST.hpp
+ * Author(s): Alexis Atianzar & Arun Ramakrishnan
+ * Date: 10/5/2016
+ * Description: Contains the implementations for the BST class, which is
+ * a version of a Binary Search Tree. This particular BST does not allow
+ * the same data points to be present within the tree, and has multiple
+ * functions, such as: insert, a destructor, find, size, height, empty, and
+ * deleteAll.
+ */
+
 #ifndef BST_HPP
 #define BST_HPP
 #include "BSTNode.hpp"
@@ -113,12 +124,8 @@ BST<Data>::~BST() {
  */
 template <typename Data>
 std::pair<BSTIterator<Data>, bool> BST<Data>::insert(const Data& item) {
-  // TODO
-  // HINT: Copy code from your BSTInt class and change the return value
-  // REPLACE THE LINE BELOW
-//  return std::pair<BSTIterator<Data>, bool>(BSTIterator<Data>(0), false);
  
- unsigned int localHeight = 0;
+  unsigned int localHeight = 0;
   
   //if there are no nodes in the tree, the first node entered becomes the root
   if (!root) {
@@ -129,12 +136,6 @@ std::pair<BSTIterator<Data>, bool> BST<Data>::insert(const Data& item) {
 
   BSTNode<Data>* curr = root;
 
-  if(root->data == item) {
-    //checks if the data is already found in the tree
-    return std::pair<BSTIterator<Data>, bool>(BSTIterator<Data>(nullptr), 
-        false);
-  }
-  
   // loops until it finds the correct spot for the node
   while (curr->left || curr->right) { 
 
@@ -161,14 +162,9 @@ std::pair<BSTIterator<Data>, bool> BST<Data>::insert(const Data& item) {
     }
 
     else {
+      // if item same as current node, return false
       return std::pair<BSTIterator<Data>, bool>(BSTIterator<Data>(nullptr), 
           false);
-    }
-
-    if(item == curr->data) {
-      return std::pair<BSTIterator<Data>, bool>(BSTIterator<Data>(nullptr), 
-          false); 
-      //if the data is the same as another node, the insertion stops
     }
 
   }
@@ -183,9 +179,13 @@ std::pair<BSTIterator<Data>, bool> BST<Data>::insert(const Data& item) {
     curr->left = newNode;
     newNode->parent = curr;
   }
-  else {
+  else if(curr->data < item){
     curr->right = newNode;
     newNode->parent = curr;
+  }
+  else {
+    return std::pair<BSTIterator<Data>, bool>(BSTIterator<Data>(nullptr), 
+        false);
   }
 
   // if new height exceeds original height, update BST height
@@ -208,21 +208,30 @@ std::pair<BSTIterator<Data>, bool> BST<Data>::insert(const Data& item) {
 template <typename Data>
 BSTIterator<Data> BST<Data>::find(const Data& item) const
 {
-  // TODO
-  // HINT: Copy code from your BSTInt class and change the return value
   
+  // create a working node to search through the tree
   BSTNode<Data>* curr = root;
+
+  // loop through nodes until null nodes
   while (curr) {
+
+    // search under right child
     if (curr->data < item) {
       curr = curr->right;
     }
+
+    // search under left child
     else if (item < curr->data) {
       curr = curr->left;
     }
     else {
+
+      // found item in tree
       return BSTIterator<Data>(curr);
     }
   }
+
+  // return not found
   return BSTIterator<Data>(nullptr);
 }
 
@@ -240,8 +249,6 @@ unsigned int BST<Data>::size() const
 template <typename Data> 
 unsigned int BST<Data>::height() const
 {
-  // TODO
-  // HINT: Copy code from your BSTInt class
   return heightVar;
   
 }
@@ -252,8 +259,6 @@ unsigned int BST<Data>::height() const
 template <typename Data>
 bool BST<Data>::empty() const
 {
-  // TODO
-  // HINT: Copy code form your BSTInt class
   
   // if the size is 0, the BST is empty
   if(isize == 0) {
@@ -289,11 +294,19 @@ BSTIterator<Data> BST<Data>::end() const
 template <typename Data>
 BSTNode<Data>* BST<Data>::first(BSTNode<Data>* root)
 {
+
+  // create working node to search through tree
   BSTNode<Data>* curr = root;
+
+  // if no node in tree at all, return null
   if (!curr) {
     return nullptr;
   } 
+
+  // smallest (first) item in tree would be on the left
   if (curr->left) {
+
+    // keep looping through the left child for smallest item
     while (curr->left) {
       curr = curr->left;
     }
@@ -309,8 +322,6 @@ BSTNode<Data>* BST<Data>::first(BSTNode<Data>* root)
 template <typename Data>
 void BST<Data>::deleteAll(BSTNode<Data>* n)
 {
-  // TODO
-  // HINT: Copy code from your BSTInt class.
   
   // set working node for traversal
   BSTNode<Data>* curr = n;

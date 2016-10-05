@@ -1,3 +1,10 @@
+/*
+ * Names: Arun Ramakrishnan & Alexis Atianzar
+ * Date: October 5th, 2016
+ * This file is used to start up the program and create a BST.
+ *
+ */
+
 #include "BST.hpp"
 #include <iostream>
 #include <algorithm>
@@ -14,6 +21,10 @@
  *  (except in odd cases, eg. "50 CENT" and "ICE-T")
  */
 
+/*
+ * This is the main method of the program, BST. This runs the program, 
+ * and creates a BST and adds the actors names to it.
+ */
 using namespace std;
 
 int main(int argc, char* argv[])
@@ -49,17 +60,29 @@ int main(int argc, char* argv[])
         // Follow the comments below to add code:
         
         // TODO: Create a new BST here
+        BST<string> actorTree;
 
         
         while (getline(in, name)) {
             // TODO: add the name string to the BST
-
+            auto added = actorTree.insert(name);
+            if (*(added.first) != name) {
+              cout << "Could not add name " << name << endl;
+              return -1;
+            }
+            if (!added.second) {
+              cout << "Could not add name " << name << endl;
+              return -1;
+            }
+ 
             
         }
 
         // TODO: Get the height of the BST and store it in height
+        height = actorTree.height();
 
         // TODO: Get the size of the BST and store it in size
+        size = actorTree.size();
 
         // DO NOT CHANGE THE LINES BELOW
         cout << "Size of tree: " << size << endl;
@@ -70,9 +93,15 @@ int main(int argc, char* argv[])
             cout << "Enter actor/actress name: " << endl;
             getline(cin, name);
             
-            // TODO: Chainge the if statment to check is name is in the BST
-            if (true) {
+            // TODO: Change the if statment to check if name is in the BST
+            //BSTIterator<string> foundIt = actorTree.find(name);
+            if (actorTree.find(name) != nullptr) {
+              if((*(actorTree.find(name))) == name){
                 cout << name << " found!" << endl;
+              }
+              else{
+                cout << name << "NOT found" << "\n";
+              }
             }
             else {
                 cout << name << " NOT found" << "\n";

@@ -1,3 +1,12 @@
+/**
+ * Filename: BSTNode.hpp
+ * Author(s): Alexis Atianzar & Arun Ramakrishnan
+ * Date: 10/5/2016
+ * Description: Contains the implementations for the BSTNode class, which is
+ * used for the inserted nodes of a Binary Search Tree. This has multiple
+ * functions, such as: successor.
+ */
+
 #ifndef BSTNODE_HPP
 #define BSTNODE_HPP
 #include <iostream>
@@ -46,21 +55,31 @@ BSTNode<Data>::BSTNode(const Data & d) : left(0), right(0), parent(0), data(d) {
 template <typename Data>
 BSTNode<Data>* BSTNode<Data>::successor()
 {
-  //TODO
 
+  // successor would be right child
   if (right) {
     BSTNode<Data>* localLeft = right;
+
+    // check if right child has smaller left children
     while(localLeft->left){
       localLeft = localLeft->left;
     }
     return localLeft;
   }
+
+  // if parent is > curr
   else if (parent != NULL) {
+
+    // if parent is instantly successor, return parent
     if (this->data < (parent)->data){
       return parent;
     }
+
+    // if parent is < curr
     else if ((parent)->data < this->data) {
       BSTNode<Data>* localParent = parent;
+
+      // go up the tree through parents to find successor
       while (localParent) {
         if ((localParent)->data < this->data) {
           localParent =  (localParent)->parent;

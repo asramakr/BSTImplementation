@@ -53,4 +53,12 @@ Q4. When we were writing the tests, one test consisted of the root node
     children and if the new node would be inserted under those children or the
     current node itself.
 
-Q5. 
+Q5. The insert method in the BST class would use passing by reference because 
+    the iterator, an outside object, is trying to access the nodes within the
+    tree and therefore needs the address of the original nodes. However, the
+    BSTInt class can use passing by value because it is okay to access the
+    nodes in the tree through copies and don't necessarily need the original
+    copies.
+
+Q6. Sorted input lists tree height are larger than random ones.
+

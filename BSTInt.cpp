@@ -45,11 +45,6 @@ bool BSTInt::insert(int item)
 
   BSTNodeInt* curr = root;
 
-  if(root->data == item) {
-    //checks if the data is already found in the tree
-    return false;
-  }
-  
   // loops until it finds the correct spot for the node
   while (curr->left || curr->right) { 
 
@@ -78,12 +73,6 @@ bool BSTInt::insert(int item)
     else {
       return false;
     }
-
-    if(item == curr->data) {
-      return false; 
-      //if the data is the same as another node, the insertion stops
-    }
-
   }
   localHeight++; 
   //local height increases when it is placed under a node with no children
@@ -96,9 +85,12 @@ bool BSTInt::insert(int item)
     curr->left = newNode;
     newNode->parent = curr;
   }
-  else {
+  else if (curr->data < item) {
     curr->right = newNode;
     newNode->parent = curr;
+  }
+  else{
+    return false;
   }
 
   // if new height exceeds original height, update BST height
