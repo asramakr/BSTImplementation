@@ -78,7 +78,7 @@ bool BSTIterator<Data>::operator==(BSTIterator<Data> const & other) const {
   // Return true if other is NOT equal to the calling object
   // Two iterators are equal if they point to the same BSTNode in the same BST  
   
-  if((&(other)->curr) == (this->curr)){
+  if(((&other)->curr) == (this->curr)){
     return true;
   }
   return false;
